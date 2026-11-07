@@ -1,14 +1,15 @@
+```html
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Universal Downloader — Les catalogues Xbox et Epic Games</title>
-<meta name="description" content="Explore les catalogues Xbox Game Pass et Epic Games, gère ta bibliothèque locale et télécharge tes jeux avec Universal Downloader pour Windows.">
+<title>Universal Downloader — Xbox and Epic Games Catalogs</title>
+<meta name="description" content="Explore the Xbox Game Pass and Epic Games catalogs, manage your local library, and download your games with Universal Downloader for Windows.">
 <meta name="theme-color" content="#08080f">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Universal Downloader">
-<meta property="og:description" content="Explore les catalogues Xbox Game Pass et Epic Games, gère ta bibliothèque locale et télécharge tes jeux.">
+<meta property="og:description" content="Explore the Xbox Game Pass and Epic Games catalogs, manage your local library, and download your games.">
 <meta property="og:image" content="/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
@@ -38,11 +39,11 @@
   section { padding: 84px 0; position: relative; }
   .center { text-align: center; } .center .sub { margin-left: auto; margin-right: auto; }
 
-  /* Révélation au scroll (uniquement si JS actif) */
+  /* Scroll reveal (only when JavaScript is enabled) */
   .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; transition-delay: var(--d, 0s); }
   .js .reveal.in { opacity: 1; transform: none; }
 
-  /* Boutons */
+  /* Buttons */
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 16px 30px; border-radius: 14px; border: 0; cursor: pointer;
     background: linear-gradient(135deg, #8b5cf6, var(--accent) 55%, #6d28d9); color: #fff; font: 600 17px/1 inherit; text-decoration: none;
     box-shadow: 0 10px 30px rgba(124, 58, 237, .45), inset 0 1px 0 rgba(255, 255, 255, .28); transition: transform .15s ease, box-shadow .15s ease; }
@@ -84,7 +85,7 @@
   .meta b { color: var(--text); font-weight: 600; }
   .os-note { display: none; margin-top: 8px; font-size: 13px; color: #fbbf24; }
 
-  /* Maquette de l'app */
+  /* App mockup */
   .stage { margin-top: 64px; perspective: 1500px; }
   .mock { max-width: 980px; margin: 0 auto; border-radius: 18px; background: #08080f; border: 1px solid rgba(168, 85, 247, .35);
     box-shadow: 0 50px 120px -20px rgba(124, 58, 237, .55), 0 0 0 1px rgba(255,255,255,.04); overflow: hidden; text-align: left;
@@ -122,14 +123,14 @@
   .m-info i + i { width: 46%; background: #1f1f34; }
   .m-info u { display: block; height: 20px; border-radius: 6px; background: var(--accent); margin-top: 4px; }
 
-  /* Bandeau de chiffres (données GitHub) */
+  /* Statistics (GitHub data) */
   .stats { padding: 20px 0 0; }
   .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line2); border: 1px solid var(--line2); border-radius: var(--radius); overflow: hidden; }
   .stat { background: var(--bg2); padding: 24px 22px; text-align: center; }
   .stat b { display: block; font-size: clamp(24px, 3.4vw, 34px); letter-spacing: -.02em; }
   .stat span { font-size: 13px; color: var(--muted); }
 
-  /* Fonctionnalités */
+  /* Features */
   .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 46px; }
   .card { background: linear-gradient(180deg, var(--card2), var(--card)); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
   .card:hover { transform: translateY(-4px); border-color: rgba(168, 85, 247, .55); box-shadow: 0 18px 50px -18px rgba(124, 58, 237, .55); }
@@ -138,7 +139,7 @@
   .card h3 { font-size: 18px; margin-bottom: 8px; }
   .card p { margin: 0; color: var(--muted); font-size: 15px; }
 
-  /* Mise en avant trailers */
+  /* Trailer showcase */
   .split { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; align-items: center; }
   .checks { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 12px; }
   .checks li { display: flex; gap: 12px; color: #d7d4e6; }
@@ -154,14 +155,14 @@
   .player .bar::after { content: ""; position: absolute; inset: 0; width: 38%; border-radius: 3px; background: var(--accent2); }
   .player .cap { position: absolute; left: 18px; top: 14px; font-size: 12px; padding: 4px 10px; border-radius: 99px; background: rgba(0, 0, 0, .45); }
 
-  /* Étapes */
+  /* Installation steps */
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 46px; counter-reset: s; }
   .step { counter-increment: s; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; position: relative; }
   .step::before { content: counter(s); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6, #6d28d9); font-weight: 700; margin-bottom: 16px; }
   .step h3 { font-size: 18px; margin-bottom: 8px; } .step p { margin: 0; color: var(--muted); font-size: 15px; }
   code { background: rgba(255, 255, 255, .08); padding: 1px 7px; border-radius: 6px; font-size: .9em; }
 
-  /* Nouveautés (notes de version GitHub) */
+  /* What's new (GitHub release notes) */
   .notes { display: grid; gap: 16px; margin-top: 40px; max-width: 820px; margin-left: auto; margin-right: auto; }
   .note { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; }
   .note header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 12px; }
@@ -186,7 +187,7 @@
   details[open] summary::after { transform: rotate(45deg); }
   details p { margin: 0; padding: 0 22px 20px; color: var(--muted); font-size: 15px; }
 
-  /* CTA final */
+  /* Final CTA */
   .final { text-align: center; padding: 64px 28px; border-radius: 28px; position: relative; overflow: hidden; border: 1px solid var(--line);
     background: radial-gradient(600px 300px at 50% 0, rgba(124, 58, 237, .5), transparent 70%), var(--bg2); }
   .final h2 { margin-bottom: 12px; } .final .sub { margin: 0 auto 30px; }
@@ -222,14 +223,14 @@
 <header class="top">
   <div class="wrap nav">
     <a class="brand" href="#top"><img src="./icon.svg" alt="" width="32" height="32"> Universal Downloader</a>
-    <nav class="links" aria-label="Navigation principale">
-      <a href="#fonctions">Fonctionnalités</a>
+    <nav class="links" aria-label="Main navigation">
+      <a href="#fonctions">Features</a>
       <a href="#trailers">Trailers</a>
-      <a href="#nouveautes">Nouveautés</a>
+      <a href="#nouveautes">What's New</a>
       <a href="#faq">FAQ</a>
       <a class="btn sm" data-download href="/download">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
-        Télécharger
+        Download
       </a>
     </nav>
   </div>
@@ -240,18 +241,18 @@
   <section class="hero">
     <div class="grid-bg"></div>
     <div class="wrap">
-      <a class="pill reveal" href="#nouveautes"><i></i><span>Dernière version : <b data-version>…</b></span></a>
-      <h1 class="reveal" style="--d:.05s">Xbox et Epic Games,<br><span class="grad">au même endroit.</span></h1>
-      <p class="lead reveal" style="--d:.1s">Explore les catalogues Xbox Game Pass et Epic Games, gère ta bibliothèque locale et télécharge des jeux depuis une seule application Windows écrite en Rust.</p>
+      <a class="pill reveal" href="#nouveautes"><i></i><span>Latest version: <b data-version>…</b></span></a>
+      <h1 class="reveal" style="--d:.05s">Xbox and Epic Games,<br><span class="grad">all in one place.</span></h1>
+      <p class="lead reveal" style="--d:.1s">Explore the Xbox Game Pass and Epic Games catalogs, manage your local library, and download games from a single Windows application built with Rust.</p>
       <div class="cta reveal" style="--d:.15s">
         <a class="btn" data-download href="/download">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
-          Télécharger pour Windows
+          Download for Windows
         </a>
-        <a class="btn ghost" href="#fonctions">Découvrir</a>
+        <a class="btn ghost" href="#fonctions">Discover</a>
       </div>
-      <div class="meta reveal" style="--d:.2s">Windows 10 / 11 · <span data-meta>Dernière version disponible</span></div>
-      <div class="os-note" id="os-note">Universal Downloader est disponible uniquement pour Windows.</div>
+      <div class="meta reveal" style="--d:.2s">Windows 10 / 11 · <span data-meta>Latest version available</span></div>
+      <div class="os-note" id="os-note">Universal Downloader is only available for Windows.</div>
 
       <div class="stage reveal" style="--d:.25s" aria-hidden="true">
         <div class="mock">
@@ -267,7 +268,7 @@
             </aside>
             <main>
               <div class="m-head"><b>Game catalog</b><div class="m-search"></div></div>
-              <div class="m-stores"><span>Xbox Game Pass</span><span>Epic Games</span><span class="on">All Catalog</span></div>
+              <div class="m-stores"><span>Xbox Game Pass</span><span>Epic Games</span><span class="on">All Catalogs</span></div>
               <div class="m-chips"><span class="on">All genres</span><span>Action</span><span>Adventure</span><span>RPG</span><span>Racing</span><span>Strategy</span></div>
               <div class="m-grid">
                 <div class="m-card"><div class="m-art" style="--h:268" data-tag="GAME PASS"></div><div class="m-info"><i></i><i></i><u></u></div></div>
@@ -284,39 +285,39 @@
     </div>
   </section>
 
-  <!-- CHIFFRES (lus depuis l'API GitHub) -->
+  <!-- STATISTICS (loaded from the GitHub API) -->
   <div class="stats" id="stats" hidden>
     <div class="wrap reveal">
       <div class="stats-grid">
-        <div class="stat"><b data-version>—</b><span>Dernière version</span></div>
-        <div class="stat"><b data-count>—</b><span>Téléchargements</span></div>
-        <div class="stat"><b data-size>—</b><span>Taille de l'installeur</span></div>
-        <div class="stat"><b data-date>—</b><span>Dernière mise à jour</span></div>
+        <div class="stat"><b data-version>—</b><span>Latest version</span></div>
+        <div class="stat"><b data-count>—</b><span>Downloads</span></div>
+        <div class="stat"><b data-size>—</b><span>Installer size</span></div>
+        <div class="stat"><b data-date>—</b><span>Last updated</span></div>
       </div>
     </div>
   </div>
 
-  <!-- FONCTIONNALITÉS -->
+  <!-- FEATURES -->
   <section id="fonctions">
     <div class="wrap">
       <div class="center reveal">
-        <span class="eyebrow">Fonctionnalités</span>
-        <h2>Tout ce qu'il faut, <span class="grad">rien de superflu.</span></h2>
-        <p class="sub">Une interface sombre et fluide, pensée pour parcourir des milliers de jeux sans lenteur.</p>
+        <span class="eyebrow">Features</span>
+        <h2>Everything you need, <span class="grad">nothing you don't.</span></h2>
+        <p class="sub">A sleek, responsive dark interface designed to browse thousands of games without slowing down.</p>
       </div>
       <div class="features">
         <article class="card reveal"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
-          <h3>Catalogues Xbox &amp; Epic</h3><p>Parcours séparément ou ensemble les jeux Xbox Game Pass et Epic Games, avec recherche, filtres, pochettes et fiches détaillées.</p></article>
+          <h3>Xbox &amp; Epic Catalogs</h3><p>Browse Xbox Game Pass and Epic Games titles separately or together, with search, filters, cover art, and detailed game pages.</p></article>
         <article class="card reveal" style="--d:.06s"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
-          <h3>Recherche &amp; filtres</h3><p>Recherche par titre, studio ou genre. Filtre par plateforme, installé ou non, trie par taille ou popularité.</p></article>
+          <h3>Search &amp; Filters</h3><p>Search by title, studio, or genre. Filter by platform or installation status, and sort by size or popularity.</p></article>
         <article class="card reveal" style="--d:.12s"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></div>
-          <h3>Ma bibliothèque</h3><p>Scanne ton dossier de jeux : chaque dossier est reconnu dans le catalogue. Lance un jeu ou ouvre son dossier en un clic.</p></article>
+          <h3>My Library</h3><p>Scan your games folder: each folder is automatically matched with the catalog. Launch a game or open its folder with a single click.</p></article>
         <article class="card reveal"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8.5 5 3.5-5 3.5Z"/></svg></div>
-          <h3>Trailers intégrés</h3><p>Regarde les bandes-annonces directement dans l'app, avec le son, la barre de lecture et le plein écran.</p></article>
+          <h3>Built-in Trailers</h3><p>Watch game trailers directly in the app, with audio, playback controls, and fullscreen support.</p></article>
         <article class="card reveal" style="--d:.06s"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h6"/></svg></div>
-          <h3>Fiches détaillées</h3><p>Retrouve descriptions, captures, genres, dates de sortie, informations de boutique et données disponibles pour chaque jeu.</p></article>
+          <h3>Detailed Game Pages</h3><p>Find descriptions, screenshots, genres, release dates, store information, and available data for each game.</p></article>
         <article class="card reveal" style="--d:.12s"><div class="ico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg></div>
-          <h3>Rapide &amp; local</h3><p>Application native écrite en Rust, thème Fluent avec effet Mica. Aucun compte à créer, tes réglages restent sur ton PC.</p></article>
+          <h3>Fast &amp; Local</h3><p>A native Rust application featuring a Fluent design with Mica effects. No account required, and your settings stay on your PC.</p></article>
       </div>
     </div>
   </section>
@@ -325,13 +326,13 @@
   <section id="trailers">
     <div class="wrap split">
       <div class="reveal">
-        <span class="eyebrow">Lecteur intégré</span>
-        <h2>Les trailers, <span class="grad">sans quitter l'app.</span></h2>
-        <p class="sub">Un clic sur la miniature et la bande-annonce se lance dans une surimpression plein cadre.</p>
+        <span class="eyebrow">Built-in Player</span>
+        <h2>Game trailers, <span class="grad">without leaving the app.</span></h2>
+        <p class="sub">Click a thumbnail to play the trailer in a full-screen overlay.</p>
         <ul class="checks">
-          <li>Lecture des trailers au format DASH, avec le son</li>
-          <li>Contrôles complets : pause, volume, plein écran</li>
-          <li>Se ferme avec <code>Échap</code> ou un clic à côté</li>
+          <li>DASH trailer playback with audio</li>
+          <li>Full controls: pause, volume, and fullscreen</li>
+          <li>Close with <code>Esc</code> or by clicking outside</li>
         </ul>
       </div>
       <div class="player reveal" style="--d:.1s" aria-hidden="true">
@@ -347,24 +348,24 @@
     <div class="wrap">
       <div class="center reveal">
         <span class="eyebrow">Installation</span>
-        <h2>Prêt en <span class="grad">moins d'une minute.</span></h2>
+        <h2>Up and running in <span class="grad">less than a minute.</span></h2>
       </div>
       <div class="steps">
-        <div class="step reveal"><h3>Télécharge</h3><p>Le bouton récupère toujours la dernière version de l'installeur <code>UniversalDownloader-Setup.exe</code>.</p></div>
-        <div class="step reveal" style="--d:.07s"><h3>Installe</h3><p>Lance l'installeur. Si Windows SmartScreen affiche un avertissement, clique sur « Informations complémentaires » puis « Exécuter quand même ».</p></div>
-        <div class="step reveal" style="--d:.14s"><h3>Joue</h3><p>Dans <b>My Library</b>, choisis ton dossier de jeux et lance un scan : tout apparaît, prêt à être lancé.</p></div>
+        <div class="step reveal"><h3>Download</h3><p>The download button always fetches the latest version of <code>UniversalDownloader-Setup.exe</code>.</p></div>
+        <div class="step reveal" style="--d:.07s"><h3>Install</h3><p>Run the installer. If Windows SmartScreen displays a warning, click "More info" and then "Run anyway".</p></div>
+        <div class="step reveal" style="--d:.14s"><h3>Play</h3><p>Open <b>My Library</b>, select your games folder, and start a scan. Your games will appear, ready to launch.</p></div>
       </div>
-      <p class="center reveal" style="color:var(--muted);font-size:14px;margin-top:26px">Les trailers utilisent le runtime Microsoft WebView2, présent sur Windows 11 et sur la plupart des Windows 10 à jour.</p>
+      <p class="center reveal" style="color:var(--muted);font-size:14px;margin-top:26px">Trailers use the Microsoft WebView2 Runtime, which is included with Windows 11 and most up-to-date Windows 10 installations.</p>
     </div>
   </section>
 
-  <!-- NOUVEAUTÉS -->
+  <!-- WHAT'S NEW -->
   <section id="nouveautes">
     <div class="wrap">
       <div class="center reveal">
-        <span class="eyebrow">Nouveautés</span>
-        <h2>Les dernières <span class="grad">versions.</span></h2>
-        <p class="sub">Les notes de version viennent directement de GitHub, toujours à jour.</p>
+        <span class="eyebrow">What's New</span>
+        <h2>The latest <span class="grad">releases.</span></h2>
+        <p class="sub">Release notes are fetched directly from GitHub and are always up to date.</p>
       </div>
       <div class="notes" id="notes"><div class="skeleton"></div><div class="skeleton"></div></div>
     </div>
@@ -373,35 +374,35 @@
   <!-- FAQ -->
   <section id="faq">
     <div class="wrap">
-      <div class="center reveal"><span class="eyebrow">FAQ</span><h2>Questions fréquentes</h2></div>
+      <div class="center reveal"><span class="eyebrow">FAQ</span><h2>Frequently Asked Questions</h2></div>
       <div class="faq">
-        <details class="reveal"><summary>L'application télécharge-t-elle les jeux ?</summary>
-          <p>Oui. Les fiches des catalogues Xbox et Epic permettent de lancer le téléchargement des jeux pris en charge. Tu peux aussi gérer et lancer les jeux déjà présents dans ta bibliothèque locale.</p></details>
-        <details class="reveal"><summary>Est-ce gratuit ?</summary>
-          <p>Oui, le téléchargement et l'utilisation de l'application sont gratuits.</p></details>
-        <details class="reveal"><summary>Pourquoi Windows affiche-t-il un avertissement SmartScreen ?</summary>
-          <p>Les installeurs non signés par un certificat payant sont signalés par SmartScreen. Clique sur « Informations complémentaires » puis « Exécuter quand même ».</p></details>
-        <details class="reveal"><summary>Les trailers ne se lancent pas, que faire ?</summary>
-          <p>Vérifie ta connexion internet et que le runtime Microsoft WebView2 est installé. Il est inclus avec Windows 11 et disponible gratuitement chez Microsoft pour Windows 10.</p></details>
-        <details class="reveal"><summary>Où sont enregistrés mes réglages ?</summary>
-          <p>Dans <code>%APPDATA%\UniversalDownloader</code> sur ton PC. Rien n'est envoyé ailleurs.</p></details>
-        <details class="reveal"><summary>Comment mettre à jour l'application ?</summary>
-          <p>Retélécharge la dernière version depuis cette page et relance l'installeur.</p></details>
+        <details class="reveal"><summary>Does the application download games?</summary>
+          <p>Yes. Game pages in the Xbox and Epic catalogs allow you to start downloading supported games. You can also manage and launch games already available in your local library.</p></details>
+        <details class="reveal"><summary>Is it free?</summary>
+          <p>Yes, downloading and using the application is completely free.</p></details>
+        <details class="reveal"><summary>Why does Windows display a SmartScreen warning?</summary>
+          <p>Installers that are not signed with a paid code-signing certificate may be flagged by SmartScreen. Click "More info" and then "Run anyway".</p></details>
+        <details class="reveal"><summary>My trailers won't play. What should I do?</summary>
+          <p>Check your internet connection and make sure the Microsoft WebView2 Runtime is installed. It is included with Windows 11 and available for free from Microsoft for Windows 10.</p></details>
+        <details class="reveal"><summary>Where are my settings stored?</summary>
+          <p>In <code>%APPDATA%\UniversalDownloader</code> on your PC. Nothing is sent anywhere else.</p></details>
+        <details class="reveal"><summary>How do I update the application?</summary>
+          <p>Download the latest version from this page and run the installer again.</p></details>
       </div>
     </div>
   </section>
 
-  <!-- CTA FINAL -->
+  <!-- FINAL CTA -->
   <section style="padding-top:20px">
     <div class="wrap">
       <div class="final reveal">
-        <h2>Prêt à explorer <span class="grad">le catalogue ?</span></h2>
-        <p class="sub">Télécharge Universal Downloader et retrouve tous tes jeux au même endroit.</p>
+        <h2>Ready to explore <span class="grad">the catalog?</span></h2>
+        <p class="sub">Download Universal Downloader and find all your games in one place.</p>
         <a class="btn" data-download href="/download">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
-          Télécharger pour Windows
+          Download for Windows
         </a>
-        <div class="meta" style="margin-top:16px"><span data-meta>Dernière version disponible</span></div>
+        <div class="meta" style="margin-top:16px"><span data-meta>Latest version available</span></div>
       </div>
     </div>
   </section>
@@ -411,7 +412,7 @@
   <div class="wrap foot">
     <span>© <span id="year">2026</span> Universal Downloader</span>
     <nav>
-      <a href="https://github.com/MidacoYT/UniversalDownloader/releases" rel="noopener">Toutes les versions</a>
+      <a href="https://github.com/MidacoYT/UniversalDownloader/releases" rel="noopener">All Releases</a>
       <a href="https://github.com/MidacoYT/UniversalDownloader" rel="noopener">GitHub</a>
     </nav>
   </div>
@@ -420,7 +421,7 @@
 <script>
 (function () {
   'use strict';
-  // ── Seule configuration : le dépôt. Aucune version n'est écrite en dur. ──
+  // ── Only configuration: the repository. No hardcoded release version. ──
   var REPO = 'MidacoYT/UniversalDownloader';
   var API = 'https://api.github.com/repos/' + REPO + '/releases?per_page=10';
   var CACHE_KEY = 'ud-releases-v2', CACHE_MS = 5 * 60 * 1000;
@@ -432,7 +433,7 @@
   $('#year').textContent = new Date().getFullYear();
   if (!/Windows/i.test(navigator.userAgent)) $('#os-note').style.display = 'block';
 
-  // Révélation au scroll
+  // Scroll reveal
   var items = $$('.reveal');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
@@ -441,7 +442,7 @@
     items.forEach(function (el) { io.observe(el); });
   } else items.forEach(function (el) { el.classList.add('in'); });
 
-  // ── Données GitHub (avec cache pour ménager la limite de l'API) ──
+  // ── GitHub data (with caching to reduce API usage) ──
   function load() {
     try {
       var c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
@@ -456,21 +457,21 @@
     var a = rel.assets || [];
     return a.find(function (x) { return /setup.*\.exe$/i.test(x.name); }) || a.find(function (x) { return /\.exe$/i.test(x.name); }) || null;
   };
-  var fmtSize = function (b) { return (b / 1048576).toFixed(1).replace('.', ',') + ' Mo'; };
-  var fmtDate = function (iso) { return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }); };
-  var fmtShort = function (iso) { return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' }); };
+  var fmtSize = function (b) { return (b / 1048576).toFixed(1) + ' MB'; };
+  var fmtDate = function (iso) { return new Date(iso).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }); };
+  var fmtShort = function (iso) { return new Date(iso).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }); };
 
   function countUp(el, to) {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches || to < 2) { el.textContent = to.toLocaleString('fr-FR'); return; }
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || to < 2) { el.textContent = to.toLocaleString('en-US'); return; }
     var t0 = performance.now(), dur = 900;
     (function tick(t) {
       var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(to * e).toLocaleString('fr-FR');
+      el.textContent = Math.round(to * e).toLocaleString('en-US');
       if (p < 1) requestAnimationFrame(tick);
     })(t0);
   }
 
-  // Rend les notes de version (Markdown simplifié) sans innerHTML.
+  // Render release notes (simplified Markdown) without innerHTML.
   function renderBody(md, box) {
     var clean = function (s) { return s.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*_`]+/g, '').trim(); };
     var ul = null, shown = 0;
@@ -483,7 +484,7 @@
       else { ul = null; var p = document.createElement('p'); p.textContent = clean(line); box.appendChild(p); }
       shown++;
     });
-    if (!shown) { var p = document.createElement('p'); p.textContent = 'Pas de notes pour cette version.'; box.appendChild(p); }
+    if (!shown) { var p = document.createElement('p'); p.textContent = 'No release notes available for this version.'; box.appendChild(p); }
   }
 
   function renderNotes(releases) {
@@ -492,11 +493,11 @@
       var n = document.createElement('article'); n.className = 'note';
       var head = document.createElement('header');
       var tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = rel.name || rel.tag_name; head.appendChild(tag);
-      if (i === 0) { var b = document.createElement('span'); b.className = 'badge'; b.textContent = 'DERNIÈRE'; head.appendChild(b); }
+      if (i === 0) { var b = document.createElement('span'); b.className = 'badge'; b.textContent = 'LATEST'; head.appendChild(b); }
       var t = document.createElement('time'); t.dateTime = rel.published_at; t.textContent = fmtDate(rel.published_at); head.appendChild(t);
       n.appendChild(head);
       renderBody(rel.body, n);
-      var a = document.createElement('a'); a.className = 'more'; a.rel = 'noopener'; a.textContent = 'Voir sur GitHub →';
+      var a = document.createElement('a'); a.className = 'more'; a.rel = 'noopener'; a.textContent = 'View on GitHub →';
       if (/^https:\/\/github\.com\//.test(rel.html_url)) a.href = rel.html_url;
       n.appendChild(a);
       box.appendChild(n);
@@ -526,14 +527,15 @@
     $('#stats').hidden = false;
     renderNotes(releases);
   }).catch(function () {
-    // GitHub injoignable : les boutons gardent /download (redirection « latest »).
-    setAll('[data-version]', 'Dernière');
+    // If GitHub is unavailable, download buttons keep /download (the "latest" redirect).
+    setAll('[data-version]', 'Latest');
     $('#notes').innerHTML = '';
     var p = document.createElement('p'); p.style.cssText = 'text-align:center;color:var(--muted)';
-    p.innerHTML = 'Impossible de charger les notes de version. Consulte-les sur <a href="https://github.com/' + REPO + '/releases" rel="noopener" style="color:var(--accent3)">GitHub</a>.';
+    p.innerHTML = 'Unable to load release notes. Check them on <a href="https://github.com/' + REPO + '/releases" rel="noopener" style="color:var(--accent3)">GitHub</a>.';
     $('#notes').appendChild(p);
   });
 })();
 </script>
 </body>
 </html>
+```
