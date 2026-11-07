@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Universal Downloader — Les catalogues Xbox et Epic Games</title>
+<meta name="description" content="Explore les catalogues Xbox Game Pass et Epic Games, gère ta bibliothèque locale et télécharge tes jeux avec Universal Downloader pour Windows.">
+<meta name="theme-color" content="#08080f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Universal Downloader">
+<meta property="og:description" content="Explore les catalogues Xbox Game Pass et Epic Games, gère ta bibliothèque locale et télécharge tes jeux.">
+<meta property="og:image" content="/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #08080f; --bg2: #0d0d1a; --card: #17172a; --card2: #1d1d33;
+    --line: rgba(124, 58, 237, .26); --line2: rgba(255, 255, 255, .07);
+    --text: #f0edf9; --muted: #9a9ab0;
+    --accent: #7c3aed; --accent2: #a855f7; --accent3: #c4b5fd;
+    --radius: 18px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body { margin: 0; background: var(--bg); color: var(--text); overflow-x: hidden;
+    font: 16px/1.65 "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  img { max-width: 100%; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent3); margin-bottom: 12px; }
+  h1, h2, h3 { line-height: 1.12; letter-spacing: -.02em; margin: 0; }
+  h2 { font-size: clamp(28px, 4vw, 42px); }
+  .grad { background: linear-gradient(95deg, #ddd6fe, var(--accent2) 60%, #7c3aed); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { color: var(--muted); max-width: 620px; margin: 14px 0 0; font-size: 17px; }
+  section { padding: 84px 0; position: relative; }
+  .center { text-align: center; } .center .sub { margin-left: auto; margin-right: auto; }
+
+  /* Révélation au scroll (uniquement si JS actif) */
+  .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; transition-delay: var(--d, 0s); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  /* Boutons */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 16px 30px; border-radius: 14px; border: 0; cursor: pointer;
+    background: linear-gradient(135deg, #8b5cf6, var(--accent) 55%, #6d28d9); color: #fff; font: 600 17px/1 inherit; text-decoration: none;
+    box-shadow: 0 10px 30px rgba(124, 58, 237, .45), inset 0 1px 0 rgba(255, 255, 255, .28); transition: transform .15s ease, box-shadow .15s ease; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(124, 58, 237, .62), inset 0 1px 0 rgba(255, 255, 255, .28); }
+  .btn:active { transform: none; }
+  .btn svg { width: 21px; height: 21px; flex: none; }
+  .btn.ghost { background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px var(--line2); }
+  .btn.ghost:hover { background: rgba(255, 255, 255, .1); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16); }
+  .btn.sm { padding: 10px 18px; font-size: 14px; border-radius: 11px; gap: 8px; }
+  .btn.sm svg { width: 16px; height: 16px; }
+
+  /* Navigation */
+  header.top { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    background: rgba(8, 8, 15, .62); border-bottom: 1px solid var(--line2); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+  .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; font-weight: 700; letter-spacing: .01em; }
+  .brand img { width: 32px; height: 32px; }
+  .links { display: flex; align-items: center; gap: 26px; font-size: 14.5px; color: var(--muted); }
+  .links a:not(.btn) { text-decoration: none; transition: color .15s; }
+  .links a:not(.btn):hover { color: var(--text); }
+
+  /* Hero */
+  .hero { padding: 72px 0 40px; text-align: center; overflow: hidden; }
+  .hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; filter: blur(90px); z-index: 0; pointer-events: none; }
+  .hero::before { width: 620px; height: 620px; left: 50%; top: -240px; margin-left: -520px; background: rgba(124, 58, 237, .45); animation: drift 14s ease-in-out infinite alternate; }
+  .hero::after { width: 520px; height: 520px; left: 50%; top: -120px; margin-left: 40px; background: rgba(59, 130, 246, .28); animation: drift 17s ease-in-out infinite alternate-reverse; }
+  .grid-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size: 56px 56px; mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%); }
+  @keyframes drift { to { transform: translate(60px, 40px) scale(1.12); } }
+  .hero .wrap { position: relative; z-index: 1; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 10px; border-radius: 999px; font-size: 13px; color: var(--accent3);
+    background: rgba(124, 58, 237, .14); border: 1px solid var(--line); text-decoration: none; }
+  .pill i { width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 4px rgba(52, 211, 153, .2); }
+  .hero h1 { font-size: clamp(38px, 7vw, 74px); margin: 26px auto 0; max-width: 860px; }
+  .hero .lead { max-width: 620px; margin: 22px auto 0; font-size: clamp(16px, 2.2vw, 20px); color: var(--muted); }
+  .cta { margin-top: 38px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+  .meta { margin-top: 18px; font-size: 13.5px; color: var(--muted); min-height: 1.6em; }
+  .meta b { color: var(--text); font-weight: 600; }
+  .os-note { display: none; margin-top: 8px; font-size: 13px; color: #fbbf24; }
+
+  /* Maquette de l'app */
+  .stage { margin-top: 64px; perspective: 1500px; }
+  .mock { max-width: 980px; margin: 0 auto; border-radius: 18px; background: #08080f; border: 1px solid rgba(168, 85, 247, .35);
+    box-shadow: 0 50px 120px -20px rgba(124, 58, 237, .55), 0 0 0 1px rgba(255,255,255,.04); overflow: hidden; text-align: left;
+    transform: rotateX(7deg); transform-origin: 50% 100%; transition: transform .6s ease; }
+  .stage:hover .mock { transform: rotateX(0); }
+  .mock-bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; background: #0b0b18; border-bottom: 1px solid var(--line2); }
+  .mock-bar i { width: 11px; height: 11px; border-radius: 50%; background: #2a2a40; }
+  .mock-bar span { margin-left: 10px; font-size: 12px; color: var(--muted); }
+  .mock-body { display: grid; grid-template-columns: 190px 1fr; min-height: 420px; }
+  .mock aside { background: #090915; border-right: 1px solid var(--line2); padding: 22px 14px; }
+  .m-brand { display: flex; align-items: center; gap: 9px; padding: 0 6px 22px; font-weight: 700; font-size: 12px; letter-spacing: .04em; }
+  .m-brand img { width: 26px; height: 26px; }
+  .m-label { font-size: 9px; color: #777; letter-spacing: .1em; padding: 0 8px 8px; }
+  .m-nav { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; font-size: 12.5px; color: #c9c9d6; position: relative; }
+  .m-nav::before { content: ""; width: 14px; height: 14px; border-radius: 4px; background: #3a3a55; }
+  .m-nav.on { background: rgba(124, 58, 237, .16); color: #fff; }
+  .m-nav.on::before { background: var(--accent2); }
+  .m-nav.on::after { content: ""; position: absolute; left: -2px; top: 25%; bottom: 25%; width: 3px; border-radius: 2px; background: var(--accent2); }
+  .mock main { padding: 22px 24px; }
+  .m-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .m-head b { font-size: 20px; }
+  .m-search { width: 180px; height: 28px; border-radius: 8px; background: #17172a; border: 1px solid var(--line2); }
+  .m-stores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 14px 0; }
+  .m-stores span { padding: 8px 10px; border-radius: 9px; text-align: center; color: #d8d2ed; font-size: 10px; font-weight: 700; background: #17172a; border: 1px solid var(--line); }
+  .m-stores span.on { color: #fff; background: rgba(124, 58, 237, .3); border-color: var(--accent2); }
+  .m-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 16px 0 18px; }
+  .m-chips span { padding: 4px 11px; border-radius: 99px; font-size: 11px; color: #cfcfe0; background: #17172a; border: 1px solid var(--line); }
+  .m-chips span.on { background: rgba(124, 58, 237, .32); }
+  .m-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .m-card { background: #10101f; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .m-art { aspect-ratio: 16 / 9; position: relative; background: linear-gradient(135deg, hsl(var(--h) 70% 48%), hsl(calc(var(--h) + 45) 65% 22%)); }
+  .m-art::after { content: attr(data-tag); position: absolute; left: 7px; bottom: 7px; font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 5px; background: rgba(124, 58, 237, .9); }
+  .m-info { padding: 10px 11px 12px; display: grid; gap: 6px; }
+  .m-info i { display: block; height: 8px; border-radius: 4px; background: #2a2a42; width: 78%; }
+  .m-info i + i { width: 46%; background: #1f1f34; }
+  .m-info u { display: block; height: 20px; border-radius: 6px; background: var(--accent); margin-top: 4px; }
+
+  /* Bandeau de chiffres (données GitHub) */
+  .stats { padding: 20px 0 0; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line2); border: 1px solid var(--line2); border-radius: var(--radius); overflow: hidden; }
+  .stat { background: var(--bg2); padding: 24px 22px; text-align: center; }
+  .stat b { display: block; font-size: clamp(24px, 3.4vw, 34px); letter-spacing: -.02em; }
+  .stat span { font-size: 13px; color: var(--muted); }
+
+  /* Fonctionnalités */
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 46px; }
+  .card { background: linear-gradient(180deg, var(--card2), var(--card)); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+  .card:hover { transform: translateY(-4px); border-color: rgba(168, 85, 247, .55); box-shadow: 0 18px 50px -18px rgba(124, 58, 237, .55); }
+  .ico { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; background: rgba(124, 58, 237, .2); margin-bottom: 18px; }
+  .ico svg { width: 23px; height: 23px; stroke: #ddd6fe; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .card h3 { font-size: 18px; margin-bottom: 8px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  /* Mise en avant trailers */
+  .split { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; align-items: center; }
+  .checks { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 12px; }
+  .checks li { display: flex; gap: 12px; color: #d7d4e6; }
+  .checks li::before { content: ""; flex: none; width: 20px; height: 20px; margin-top: 3px; border-radius: 50%;
+    background: rgba(52, 211, 153, .18) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2334d399' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center / 12px no-repeat; }
+  .player { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); box-shadow: 0 40px 90px -30px rgba(124, 58, 237, .6);
+    background: radial-gradient(circle at 30% 25%, #8b5cf6 0, transparent 55%), radial-gradient(circle at 80% 85%, #1d4ed8 0, transparent 50%), #130f2a; }
+  .player .play { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%; background: rgba(10, 10, 18, .6);
+    border: 2px solid rgba(255, 255, 255, .75); display: grid; place-items: center; transition: transform .25s ease, background .25s ease; }
+  .player:hover .play { transform: scale(1.1); background: var(--accent); }
+  .player .play svg { width: 28px; height: 28px; fill: #fff; margin-left: 4px; }
+  .player .bar { position: absolute; left: 18px; right: 18px; bottom: 16px; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, .2); }
+  .player .bar::after { content: ""; position: absolute; inset: 0; width: 38%; border-radius: 3px; background: var(--accent2); }
+  .player .cap { position: absolute; left: 18px; top: 14px; font-size: 12px; padding: 4px 10px; border-radius: 99px; background: rgba(0, 0, 0, .45); }
+
+  /* Étapes */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 46px; counter-reset: s; }
+  .step { counter-increment: s; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; position: relative; }
+  .step::before { content: counter(s); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6, #6d28d9); font-weight: 700; margin-bottom: 16px; }
+  .step h3 { font-size: 18px; margin-bottom: 8px; } .step p { margin: 0; color: var(--muted); font-size: 15px; }
+  code { background: rgba(255, 255, 255, .08); padding: 1px 7px; border-radius: 6px; font-size: .9em; }
+
+  /* Nouveautés (notes de version GitHub) */
+  .notes { display: grid; gap: 16px; margin-top: 40px; max-width: 820px; margin-left: auto; margin-right: auto; }
+  .note { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; }
+  .note header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 12px; }
+  .note .tag { font-weight: 700; font-size: 18px; }
+  .note .badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 99px; background: rgba(52, 211, 153, .16); color: #6ee7b7; }
+  .note time { color: var(--muted); font-size: 13px; margin-left: auto; }
+  .note h4 { margin: 14px 0 6px; font-size: 14px; color: var(--accent3); }
+  .note ul { margin: 0; padding-left: 20px; color: #cfcce0; font-size: 15px; } .note li { margin: 3px 0; }
+  .note p { margin: 8px 0 0; color: #cfcce0; font-size: 15px; }
+  .note a.more { display: inline-block; margin-top: 14px; font-size: 13.5px; color: var(--accent3); text-decoration: none; }
+  .note a.more:hover { text-decoration: underline; }
+  .skeleton { height: 120px; border-radius: var(--radius); background: linear-gradient(90deg, var(--card) 0, var(--card2) 50%, var(--card) 100%); background-size: 200% 100%; animation: sh 1.4s linear infinite; }
+  @keyframes sh { to { background-position: -200% 0; } }
+
+  /* FAQ */
+  .faq { max-width: 780px; margin: 40px auto 0; display: grid; gap: 12px; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; transition: border-color .2s; }
+  details[open] { border-color: rgba(168, 85, 247, .5); }
+  summary { cursor: pointer; list-style: none; padding: 18px 22px; font-weight: 600; display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; font-size: 22px; color: var(--accent3); transition: transform .25s; flex: none; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin: 0; padding: 0 22px 20px; color: var(--muted); font-size: 15px; }
+
+  /* CTA final */
+  .final { text-align: center; padding: 64px 28px; border-radius: 28px; position: relative; overflow: hidden; border: 1px solid var(--line);
+    background: radial-gradient(600px 300px at 50% 0, rgba(124, 58, 237, .5), transparent 70%), var(--bg2); }
+  .final h2 { margin-bottom: 12px; } .final .sub { margin: 0 auto 30px; }
+
+  footer { margin-top: 70px; padding: 30px 0 44px; border-top: 1px solid var(--line2); color: var(--muted); font-size: 13.5px; }
+  .foot { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: space-between; align-items: center; }
+  .foot nav { display: flex; gap: 22px; } .foot a { text-decoration: none; } .foot a:hover { color: var(--text); }
+
+  @media (max-width: 920px) {
+    .features, .steps { grid-template-columns: 1fr 1fr; }
+    .split { grid-template-columns: 1fr; gap: 36px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    section { padding: 60px 0; }
+    .links a:not(.btn) { display: none; }
+    .features, .steps { grid-template-columns: 1fr; }
+    .mock-body { grid-template-columns: 1fr; } .mock aside { display: none; }
+    .m-grid { grid-template-columns: 1fr 1fr; } .m-card:nth-child(n+5) { display: none; }
+    .m-search { display: none; }
+    .note time { margin-left: 0; width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    .js .reveal { opacity: 1; transform: none; }
+    .mock { transform: none; }
+  }
+</style>
+<noscript><style>.js .reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap nav">
+    <a class="brand" href="#top"><img src="./icon.svg" alt="" width="32" height="32"> Universal Downloader</a>
+    <nav class="links" aria-label="Navigation principale">
+      <a href="#fonctions">Fonctionnalités</a>
+      <a href="#trailers">Trailers</a>
+      <a href="#nouveautes">Nouveautés</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn sm" data-download href="/download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
+        Télécharger
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="grid-bg"></div>
+    <div class="wrap">
+      <a class="pill reveal" href="#nouveautes"><i></i><span>Dernière version : <b data-version>…</b></span></a>
+      <h1 class="reveal" style="--d:.05s">Xbox et Epic Games,<br><span class="grad">au même endroit.</span></h1>
+      <p class="lead reveal" style="--d:.1s">Explore les catalogues Xbox Game Pass et Epic Games, gère ta bibliothèque locale et télécharge des jeux depuis une seule application Windows écrite en Rust.</p>
+      <div class="cta reveal" style="--d:.15s">
+        <a class="btn" data-download href="/download">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
+          Télécharger pour Windows
+        </a>
+        <a class="btn ghost" href="#fonctions">Découvrir</a>
+      </div>
+      <div class="meta reveal" style="--d:.2s">Windows 10 / 11 · <span data-meta>Dernière version disponible</span></div>
+      <div class="os-note" id="os-note">Universal Downloader est disponible uniquement pour Windows.</div>
+
+      <div class="stage reveal" style="--d:.25s" aria-hidden="true">
+        <div class="mock">
+          <div class="mock-bar"><i></i><i></i><i></i><span>Universal Downloader</span></div>
+          <div class="mock-body">
+            <aside>
+              <div class="m-brand"><img src="./icon.svg" alt="" width="26" height="26"> UNIVERSAL</div>
+              <div class="m-label">WORKSPACE</div>
+              <div class="m-nav">Home</div>
+              <div class="m-nav on">Catalog</div>
+              <div class="m-nav">My Library</div>
+              <div class="m-nav">Settings</div>
+            </aside>
+            <main>
+              <div class="m-head"><b>Game catalog</b><div class="m-search"></div></div>
+              <div class="m-stores"><span>Xbox Game Pass</span><span>Epic Games</span><span class="on">All Catalog</span></div>
+              <div class="m-chips"><span class="on">All genres</span><span>Action</span><span>Adventure</span><span>RPG</span><span>Racing</span><span>Strategy</span></div>
+              <div class="m-grid">
+                <div class="m-card"><div class="m-art" style="--h:268" data-tag="GAME PASS"></div><div class="m-info"><i></i><i></i><u></u></div></div>
+                <div class="m-card"><div class="m-art" style="--h:215" data-tag="ACTION"></div><div class="m-info"><i></i><i></i><u></u></div></div>
+                <div class="m-card"><div class="m-art" style="--h:165" data-tag="RPG"></div><div class="m-info"><i></i><i></i><u></u></div></div>
+                <div class="m-card"><div class="m-art" style="--h:20" data-tag="RACING"></div><div class="m-info"><i></i><i></i><u></u></div></div>
+                <div class="m-card"><div class="m-art" style="--h:310" data-tag="GAME PASS"></div><div class="m-info"><i></i><i></i><u></u></div></div>
+                <div class="m-card"><div class="m-art" style="--h:45" data-tag="STRATEGY"></div><div class="m-info"><i></i><i></i><u></u></div></div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHIFFRES (lus depuis l'API GitHub) -->
+  <div class="stats" id="stats" hidden>
+    <div class="wrap reveal">
+      <div class="stats-grid">
+        <div class="stat"><b data-version>—</b><span>Dernière version</span></div>
+        <div class="stat"><b data-count>—</b><span>Téléchargements</span></div>
+        <div class="stat"><b data-size>—</b><span>Taille de l'installeur</span></div>
+        <div class="stat"><b data-date>—</b><span>Dernière mise à jour</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FONCTIONNALITÉS -->
+  <section id="fonctions">
+    <div class="wrap">
+      <div class="center reveal">
+        <span class="eyebrow">Fonctionnalités</span>
+        <h2>Tout ce qu'il faut, <span class="grad">rien de superflu.</span></h2>
+        <p class="sub">Une interface sombre et fluide, pensée pour parcourir des milliers de jeux sans lenteur.</p>
+      </div>
+      <div class="features">
+        <article class="card reveal"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+          <h3>Catalogues Xbox &amp; Epic</h3><p>Parcours séparément ou ensemble les jeux Xbox Game Pass et Epic Games, avec recherche, filtres, pochettes et fiches détaillées.</p></article>
+        <article class="card reveal" style="--d:.06s"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+          <h3>Recherche &amp; filtres</h3><p>Recherche par titre, studio ou genre. Filtre par plateforme, installé ou non, trie par taille ou popularité.</p></article>
+        <article class="card reveal" style="--d:.12s"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></div>
+          <h3>Ma bibliothèque</h3><p>Scanne ton dossier de jeux : chaque dossier est reconnu dans le catalogue. Lance un jeu ou ouvre son dossier en un clic.</p></article>
+        <article class="card reveal"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8.5 5 3.5-5 3.5Z"/></svg></div>
+          <h3>Trailers intégrés</h3><p>Regarde les bandes-annonces directement dans l'app, avec le son, la barre de lecture et le plein écran.</p></article>
+        <article class="card reveal" style="--d:.06s"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h6"/></svg></div>
+          <h3>Fiches détaillées</h3><p>Retrouve descriptions, captures, genres, dates de sortie, informations de boutique et données disponibles pour chaque jeu.</p></article>
+        <article class="card reveal" style="--d:.12s"><div class="ico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg></div>
+          <h3>Rapide &amp; local</h3><p>Application native écrite en Rust, thème Fluent avec effet Mica. Aucun compte à créer, tes réglages restent sur ton PC.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAILERS -->
+  <section id="trailers">
+    <div class="wrap split">
+      <div class="reveal">
+        <span class="eyebrow">Lecteur intégré</span>
+        <h2>Les trailers, <span class="grad">sans quitter l'app.</span></h2>
+        <p class="sub">Un clic sur la miniature et la bande-annonce se lance dans une surimpression plein cadre.</p>
+        <ul class="checks">
+          <li>Lecture des trailers au format DASH, avec le son</li>
+          <li>Contrôles complets : pause, volume, plein écran</li>
+          <li>Se ferme avec <code>Échap</code> ou un clic à côté</li>
+        </ul>
+      </div>
+      <div class="player reveal" style="--d:.1s" aria-hidden="true">
+        <span class="cap">Trailer</span>
+        <div class="play"><svg viewBox="0 0 24 24"><path d="M6 4v16l14-8z"/></svg></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALLATION -->
+  <section id="installation">
+    <div class="wrap">
+      <div class="center reveal">
+        <span class="eyebrow">Installation</span>
+        <h2>Prêt en <span class="grad">moins d'une minute.</span></h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><h3>Télécharge</h3><p>Le bouton récupère toujours la dernière version de l'installeur <code>UniversalDownloader-Setup.exe</code>.</p></div>
+        <div class="step reveal" style="--d:.07s"><h3>Installe</h3><p>Lance l'installeur. Si Windows SmartScreen affiche un avertissement, clique sur « Informations complémentaires » puis « Exécuter quand même ».</p></div>
+        <div class="step reveal" style="--d:.14s"><h3>Joue</h3><p>Dans <b>My Library</b>, choisis ton dossier de jeux et lance un scan : tout apparaît, prêt à être lancé.</p></div>
+      </div>
+      <p class="center reveal" style="color:var(--muted);font-size:14px;margin-top:26px">Les trailers utilisent le runtime Microsoft WebView2, présent sur Windows 11 et sur la plupart des Windows 10 à jour.</p>
+    </div>
+  </section>
+
+  <!-- NOUVEAUTÉS -->
+  <section id="nouveautes">
+    <div class="wrap">
+      <div class="center reveal">
+        <span class="eyebrow">Nouveautés</span>
+        <h2>Les dernières <span class="grad">versions.</span></h2>
+        <p class="sub">Les notes de version viennent directement de GitHub, toujours à jour.</p>
+      </div>
+      <div class="notes" id="notes"><div class="skeleton"></div><div class="skeleton"></div></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="center reveal"><span class="eyebrow">FAQ</span><h2>Questions fréquentes</h2></div>
+      <div class="faq">
+        <details class="reveal"><summary>L'application télécharge-t-elle les jeux ?</summary>
+          <p>Oui. Les fiches des catalogues Xbox et Epic permettent de lancer le téléchargement des jeux pris en charge. Tu peux aussi gérer et lancer les jeux déjà présents dans ta bibliothèque locale.</p></details>
+        <details class="reveal"><summary>Est-ce gratuit ?</summary>
+          <p>Oui, le téléchargement et l'utilisation de l'application sont gratuits.</p></details>
+        <details class="reveal"><summary>Pourquoi Windows affiche-t-il un avertissement SmartScreen ?</summary>
+          <p>Les installeurs non signés par un certificat payant sont signalés par SmartScreen. Clique sur « Informations complémentaires » puis « Exécuter quand même ».</p></details>
+        <details class="reveal"><summary>Les trailers ne se lancent pas, que faire ?</summary>
+          <p>Vérifie ta connexion internet et que le runtime Microsoft WebView2 est installé. Il est inclus avec Windows 11 et disponible gratuitement chez Microsoft pour Windows 10.</p></details>
+        <details class="reveal"><summary>Où sont enregistrés mes réglages ?</summary>
+          <p>Dans <code>%APPDATA%\UniversalDownloader</code> sur ton PC. Rien n'est envoyé ailleurs.</p></details>
+        <details class="reveal"><summary>Comment mettre à jour l'application ?</summary>
+          <p>Retélécharge la dernière version depuis cette page et relance l'installeur.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section style="padding-top:20px">
+    <div class="wrap">
+      <div class="final reveal">
+        <h2>Prêt à explorer <span class="grad">le catalogue ?</span></h2>
+        <p class="sub">Télécharge Universal Downloader et retrouve tous tes jeux au même endroit.</p>
+        <a class="btn" data-download href="/download">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
+          Télécharger pour Windows
+        </a>
+        <div class="meta" style="margin-top:16px"><span data-meta>Dernière version disponible</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="year">2026</span> Universal Downloader</span>
+    <nav>
+      <a href="https://github.com/MidacoYT/UniversalDownloader/releases" rel="noopener">Toutes les versions</a>
+      <a href="https://github.com/MidacoYT/UniversalDownloader" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  // ── Seule configuration : le dépôt. Aucune version n'est écrite en dur. ──
+  var REPO = 'MidacoYT/UniversalDownloader';
+  var API = 'https://api.github.com/repos/' + REPO + '/releases?per_page=10';
+  var CACHE_KEY = 'ud-releases-v2', CACHE_MS = 5 * 60 * 1000;
+
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var setAll = function (sel, text) { $$(sel).forEach(function (el) { el.textContent = text; }); };
+
+  $('#year').textContent = new Date().getFullYear();
+  if (!/Windows/i.test(navigator.userAgent)) $('#os-note').style.display = 'block';
+
+  // Révélation au scroll
+  var items = $$('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  } else items.forEach(function (el) { el.classList.add('in'); });
+
+  // ── Données GitHub (avec cache pour ménager la limite de l'API) ──
+  function load() {
+    try {
+      var c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      if (c && Date.now() - c.t < CACHE_MS) return Promise.resolve(c.d);
+    } catch (e) {}
+    return fetch(API, { headers: { Accept: 'application/vnd.github+json' } })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (d) { try { localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), d: d })); } catch (e) {} return d; });
+  }
+
+  var exe = function (rel) {
+    var a = rel.assets || [];
+    return a.find(function (x) { return /setup.*\.exe$/i.test(x.name); }) || a.find(function (x) { return /\.exe$/i.test(x.name); }) || null;
+  };
+  var fmtSize = function (b) { return (b / 1048576).toFixed(1).replace('.', ',') + ' Mo'; };
+  var fmtDate = function (iso) { return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }); };
+  var fmtShort = function (iso) { return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' }); };
+
+  function countUp(el, to) {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || to < 2) { el.textContent = to.toLocaleString('fr-FR'); return; }
+    var t0 = performance.now(), dur = 900;
+    (function tick(t) {
+      var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(to * e).toLocaleString('fr-FR');
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  // Rend les notes de version (Markdown simplifié) sans innerHTML.
+  function renderBody(md, box) {
+    var clean = function (s) { return s.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*_`]+/g, '').trim(); };
+    var ul = null, shown = 0;
+    String(md || '').split(/\r?\n/).forEach(function (raw) {
+      if (shown >= 14) return;
+      var line = raw.trim(); if (!line) { ul = null; return; }
+      var h = line.match(/^#{1,6}\s+(.*)/), li = line.match(/^[-*+]\s+(.*)/);
+      if (h) { ul = null; var e = document.createElement('h4'); e.textContent = clean(h[1]); box.appendChild(e); }
+      else if (li) { if (!ul) { ul = document.createElement('ul'); box.appendChild(ul); } var l = document.createElement('li'); l.textContent = clean(li[1]); ul.appendChild(l); }
+      else { ul = null; var p = document.createElement('p'); p.textContent = clean(line); box.appendChild(p); }
+      shown++;
+    });
+    if (!shown) { var p = document.createElement('p'); p.textContent = 'Pas de notes pour cette version.'; box.appendChild(p); }
+  }
+
+  function renderNotes(releases) {
+    var box = $('#notes'); box.textContent = '';
+    releases.slice(0, 3).forEach(function (rel, i) {
+      var n = document.createElement('article'); n.className = 'note';
+      var head = document.createElement('header');
+      var tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = rel.name || rel.tag_name; head.appendChild(tag);
+      if (i === 0) { var b = document.createElement('span'); b.className = 'badge'; b.textContent = 'DERNIÈRE'; head.appendChild(b); }
+      var t = document.createElement('time'); t.dateTime = rel.published_at; t.textContent = fmtDate(rel.published_at); head.appendChild(t);
+      n.appendChild(head);
+      renderBody(rel.body, n);
+      var a = document.createElement('a'); a.className = 'more'; a.rel = 'noopener'; a.textContent = 'Voir sur GitHub →';
+      if (/^https:\/\/github\.com\//.test(rel.html_url)) a.href = rel.html_url;
+      n.appendChild(a);
+      box.appendChild(n);
+    });
+  }
+
+  load().then(function (all) {
+    var releases = all.filter(function (r) { return !r.draft; });
+    var stable = releases.filter(function (r) { return !r.prerelease; });
+    stable.sort(function (a, b) { return Date.parse(b.published_at) - Date.parse(a.published_at); });
+    releases.sort(function (a, b) { return Date.parse(b.published_at) - Date.parse(a.published_at); });
+    var latest = (stable[0] || releases[0]);
+    if (!latest) throw new Error('no release');
+
+    var asset = exe(latest);
+    if (asset && /^https:\/\/github\.com\//.test(asset.browser_download_url)) {
+      $$('[data-download]').forEach(function (a) { a.href = asset.browser_download_url; });
+    }
+    var version = String(latest.tag_name || '');
+    var total = releases.reduce(function (s, r) { return s + (r.assets || []).reduce(function (x, a) { return x + (a.download_count || 0); }, 0); }, 0);
+
+    setAll('[data-version]', version);
+    if (asset) setAll('[data-size]', fmtSize(asset.size));
+    setAll('[data-date]', fmtShort(latest.published_at));
+    setAll('[data-meta]', version + (asset ? ' · ' + fmtSize(asset.size) : '') + ' · ' + fmtDate(latest.published_at));
+    $$('[data-count]').forEach(function (el) { countUp(el, total); });
+    $('#stats').hidden = false;
+    renderNotes(releases);
+  }).catch(function () {
+    // GitHub injoignable : les boutons gardent /download (redirection « latest »).
+    setAll('[data-version]', 'Dernière');
+    $('#notes').innerHTML = '';
+    var p = document.createElement('p'); p.style.cssText = 'text-align:center;color:var(--muted)';
+    p.innerHTML = 'Impossible de charger les notes de version. Consulte-les sur <a href="https://github.com/' + REPO + '/releases" rel="noopener" style="color:var(--accent3)">GitHub</a>.';
+    $('#notes').appendChild(p);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+[build]
+  publish = "."
+
+# /download → dernière release, sans numéro de version dans l'URL
+# (GitHub résout « latest » lui-même). Seul le NOM du fichier de l'installeur est fixé.
+[[redirects]]
+  from = "/download"
+  to = "https://github.com/MidacoYT/UniversalDownloader/releases/latest/download/UniversalDownloader-Setup.exe"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/releases"
+  to = "https://github.com/MidacoYT/UniversalDownloader/releases"
+  status = 302
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
